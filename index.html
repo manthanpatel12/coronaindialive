@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./css/style.css" type="text/css" media="all" />
+  <title></title>
+</head>
+<body>
+  <div class="main">
+    <div class="india">
+      <div class="active">
+        <img class="img" src="https://cdn.pixabay.com/photo/2020/04/29/08/24/coronavirus-5107804__340.png">
+        <h1>active</h1>
+        <p id="active_cases"></p>
+      </div>
+      <div class="recovered">
+        <img class="img" src="https://cdn.pixabay.com/photo/2020/05/28/12/52/corona-5231110__340.png">
+        <h1>recovered</h1>
+        <p id="recovered_cases"></p>
+      </div>
+      <div class="death">
+        <img src="https://cdn.pixabay.com/photo/2014/03/25/15/17/cross-296395__340.png" class="img">
+        <h1>deaths</h1>
+        <p id="death_cases"></p>
+      </div>
+      <div class="total">
+        <img class="img" src="https://cdn.pixabay.com/photo/2020/04/24/11/44/coronavirus-5086544__340.png">
+        <h1>confirmed</h1>
+        <p id="total_cases"></p>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    fetch('https://api.covid19india.org/data.json').then((data) => {
+      return data.json();
+    }).then((json) =>{
+      var cases = json.statewise[0];
+      var active = document.getElementById("active_cases");
+      var recovered = document.getElementById("recovered_cases");
+      var death = document.getElementById("death_cases");
+      var total = document.getElementById("total_cases");
+      
+      active.innerHTML = cases.active;
+      recovered.innerHTML = cases.recovered;
+      death.innerHTML = cases.deaths;
+      total.innerHTML = cases.confirmed; 
+          
+    }).catch((e)=>{
+      console.log(e);
+    });
+  </script>
+</body>
+</html>
